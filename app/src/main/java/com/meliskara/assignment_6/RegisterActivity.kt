@@ -1,11 +1,11 @@
 package com.meliskara.assignment_6
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -15,18 +15,10 @@ import org.json.JSONObject
 import java.util.HashMap
 
 class RegisterActivity : AppCompatActivity() {
-    internal lateinit var editTextUsername: EditText
-    internal lateinit var editTextEmail: EditText
-    internal lateinit var editTextPassword: EditText
-    internal lateinit var radioGroupGender: RadioGroup
-    internal lateinit var progressBar: ProgressBar
-    internal lateinit var buttonRegister: Button
-    internal lateinit var textViewLogin: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        progressBar = findViewById(R.id.progressBar)
 
         //if the user is already logged in we will directly start the MainActivity (profile) activity
         if (SharedPrefManager.getInstance(this).isLoggedIn) {
@@ -35,12 +27,8 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        editTextUsername = findViewById(R.id.editTextUsername)
-        editTextEmail = findViewById(R.id.editTextEmail)
-        editTextPassword = findViewById(R.id.editTextPassword)
-        radioGroupGender = findViewById(R.id.radioGender)
-        buttonRegister = findViewById(R.id.buttonRegister)
-        textViewLogin = findViewById(R.id.textViewLogin)
+        val buttonRegister = findViewById<Button>(R.id.buttonRegister)
+        val textViewLogin = findViewById<TextView>(R.id.textViewLogin)
 
         buttonRegister.setOnClickListener(View.OnClickListener {
             //if user pressed on button register
@@ -55,6 +43,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
+        val editTextUsername = findViewById<EditText>(R.id.editTextUsername)
+        val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
+        val editTextPassword = findViewById<EditText>(R.id.editTextPassword)
+        val radioGroupGender = findViewById<RadioGroup>(R.id.radioGender)
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val username = editTextUsername.text.toString().trim { it <= ' ' }
         val email = editTextEmail.text.toString().trim { it <= ' ' }
         val password = editTextPassword.text.toString().trim { it <= ' ' }

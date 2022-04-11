@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -19,25 +16,17 @@ import org.json.JSONObject
 import java.util.HashMap
 
 class LoginActivity : AppCompatActivity() {
-    internal lateinit var etName: EditText
-    internal lateinit var etPassword: EditText
-    internal lateinit var progressBar: ProgressBar
-    internal lateinit var btnLogin: Button
-    internal lateinit var tvRegister: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val tvRegister = findViewById<TextView>(R.id.tvRegister)
 
         if (SharedPrefManager.getInstance(this).isLoggedIn) {
             finish()
             startActivity(Intent(this, MainActivity::class.java))
         }
-
-        progressBar = findViewById(R.id.progressBar)
-        etName = findViewById(R.id.etUserName)
-        etPassword = findViewById(R.id.etUserPassword)
-        btnLogin = findViewById(R.id.btnLogin)
-        tvRegister = findViewById(R.id.tvRegister)
 
         //calling the method userLogin() for login the user
         btnLogin.setOnClickListener(View.OnClickListener {
@@ -52,6 +41,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun userLogin() {
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        val etName = findViewById<EditText>(R.id.etUserName)
+        val etPassword = findViewById<EditText>(R.id.etUserPassword)
         //first getting the values
         val username = etName.text.toString()
         val password = etPassword.text.toString()
